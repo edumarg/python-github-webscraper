@@ -17,16 +17,22 @@ def get_user_image():
 def get_user_name():
     user_info = get_user_info()
     user_name = user_info.find('span', {'itemprop': 'name'}).getText().strip()
-    print('user name: ', user_name)
+    if user_name:
+        print('user name: ', user_name)
+    else:
+        print('user name: ', "N/A")
 
 
 def get_uer_web_page():
     user_info = get_user_info()
-    user_web_page = user_info.find('a', {'rel': 'nofollow me'})['href']
-    if (user_web_page):
-        print('user webpage: ', user_web_page)
-    else:
-        print(print('user webpage: ', "N/A"))
+    try:
+        user_web_page = user_info.find('a', {'rel': 'nofollow me'})['href']
+        if (user_web_page):
+            print('user webpage: ', user_web_page)
+        else:
+            print('user webpage: ', "N/A")
+    except TypeError:
+        print('user webpage: ', "N/A")
 
 
 if __name__ == '__main__':
