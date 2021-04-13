@@ -8,6 +8,30 @@ def get_user_info():
     return soup
 
 
+def get_user_image():
+    user_info = get_user_info()
+    user_image = user_info.find('img', {'alt': 'Avatar'})['src']
+    print('user image: ', user_image)
+
+
+def get_user_name():
+    user_info = get_user_info()
+    user_name = user_info.find('span', {'itemprop': 'name'}).getText().strip()
+    print('user name: ', user_name)
+
+
+def get_uer_web_page():
+    user_info = get_user_info()
+    user_web_page = user_info.find('a', {'rel': 'nofollow me'})['href']
+    if (user_web_page):
+        print('user webpage: ', user_web_page)
+    else:
+        print(print('user webpage: ', "N/A"))
+
+
 if __name__ == '__main__':
     github_user = input("Please input GitHub user name: ")
     url = f'https://github.com/{github_user}'
+    get_user_image()
+    get_user_name()
+    get_uer_web_page()
