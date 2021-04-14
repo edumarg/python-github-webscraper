@@ -23,6 +23,15 @@ def get_user_name():
         print('user name: ', "N/A")
 
 
+def get_user_bio():
+    user_info = get_user_info()
+    user_bio = user_info.find('div', {'class': 'p-note user-profile-bio mb-3 js-user-profile-bio f4'}).getText().strip()
+    if user_bio:
+        print('user bio: ', user_bio)
+    else:
+        print('user bio: ', 'N/A')
+
+
 def get_uer_web_page():
     user_info = get_user_info()
     try:
@@ -40,4 +49,5 @@ if __name__ == '__main__':
     url = f'https://github.com/{github_user}'
     get_user_image()
     get_user_name()
+    get_user_bio()
     get_uer_web_page()
