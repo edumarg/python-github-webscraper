@@ -32,11 +32,19 @@ def get_user_bio():
         print('user bio: ', 'N/A')
 
 
+def get_repositories(user):
+    user_info = get_user_info()
+    user_repositories = user_info.find('a', {'href': f'/{user}?tab=repositories'})
+    user_number_of_repositories = user_repositories.find('span', {'class': 'Counter'}).getText().strip()
+    print('user repositories: ',
+          f'{user} has {user_number_of_repositories} repositories located at https://github.com/{user_repositories["href"]}')
+
+
 def get_uer_web_page():
     user_info = get_user_info()
     try:
         user_web_page = user_info.find('a', {'rel': 'nofollow me'})['href']
-        if (user_web_page):
+        if user_web_page:
             print('user webpage: ', user_web_page)
         else:
             print('user webpage: ', "N/A")
@@ -50,4 +58,5 @@ if __name__ == '__main__':
     get_user_image()
     get_user_name()
     get_user_bio()
+    get_repositories(github_user)
     get_uer_web_page()
